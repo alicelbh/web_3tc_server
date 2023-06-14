@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const User = require('../../models/User');
 const Marker = require ('../../models/Marker');
-
+const Comment = require ('../../models/Comment')
 //Markers
 
 router.post('/updatemarker', bodyParser.json(), (req,res)=>{
@@ -50,11 +50,28 @@ router.post('/getmarker', bodyParser.json(), (req,res)=>
             .catch(err => res.status(404).json(err))
     });
 
+//Comments
+
+router.post('/addcomment', bodyParser.json(), (req, res)=>{
+    console.log(req.body)
+    Comment.create(req.body)
+        .then(res.json({msg:"Hey"}))
+        .catch(e => res.status(404))
+})
+
+router.post('/getcomments', bodyParser.json(), (req, res) => {
+    console.log(req.body);
+    Comment.find(req.body)
+        .then(com => res.json(com))
+        .catch(err => console.log(err))
+    // Comment.find()
+    //   .then(com => console.log(res) )//res.json(com))
+    //   .catch(err => res.status(404).json({ err: 'no comment' }));
+  });
 // respond with "You are connected to the server :)" when a GET request is made to the /api/test page
 router.get('/test', (req, res) => {console.log("Server test"); res.send('You are connected to the server :)')});
 
 module.exports = router;
-
 //Tests
 
 // // send list of all users when a GET request is made to the /api/getusers page
