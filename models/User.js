@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
     assoList:
       {
         type: [String],
-        required: true,
+        required: false,
       },
     google_id:
       {
