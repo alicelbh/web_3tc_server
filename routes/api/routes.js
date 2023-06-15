@@ -75,9 +75,9 @@ module.exports = router;
 //Tests
 
 // // send list of all users when a GET request is made to the /api/getusers page
-router.get('/getusers', (req, res) => {
-    console.log("Request of all users");
-    User.find()
+router.post('/getusers', bodyParser.json(), (req, res) => {
+    console.log(req.body);
+    User.find(req.body)
       .then(users => res.json(users))
       .catch(err => res.status(404).json({ nouserfound: 'No User found' }));
   });

@@ -6,6 +6,16 @@ const UserSchema = new mongoose.Schema({
       type: String,
       required: true
     },
+    assoList:
+      {
+        type: [String],
+        required: true,
+      },
+    google_id:
+      {
+        type: String,
+        required: true,
+      }
   });
   
   const User =  mongoose.model('user', UserSchema);
